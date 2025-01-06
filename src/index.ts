@@ -8,6 +8,7 @@ const argv = optimist.usage("Scrape seek according to specified filters and extr
     .demand("subclassification").describe("subclassification", "A comma separated list of the subclassifications you wish to scrape e.g. 123,456")
     .demand("location").describe("location", "The location you wish to scrape e.g. \"Sydney-NSW-2000\"")
     .demand("min-salary").describe("min-salary", "The minimum salary you wish to scrape e.g. \"12345\"")
+    .demand("work-type").describe("work-type", "A comma separated list of work type IDs (Full time, Part time, Contract, and Casual are 242, 243, 244, 245 respectively)")
     .argv;
 
 const llama = await getLlama();
@@ -28,7 +29,8 @@ const jobs = await seek_service.getListings({
     classification: argv.classification,
     sub_classification: encodeURIComponent(argv.subclassification),
     location: argv.location,
-    min_salary: argv["min-salary"]
+    min_salary: argv["min-salary"],
+    work_type: encodeURIComponent(argv["work-type"])
 });
 
 process.stdout.write(Job.header_csv_row());

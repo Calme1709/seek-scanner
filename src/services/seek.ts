@@ -8,7 +8,7 @@ interface SeekFilters {
     sub_classification: string;
     location: string;
     min_salary: string;
-    // TODO: Support filtering work type (e.g. full time, part time, contract, etc)
+    work_type: string;
 }
 
 export class SeekService {
@@ -75,7 +75,8 @@ export class SeekService {
             salaryrange: `${filters.min_salary}-`,
             salarytype: 'annual',
             subclassification: filters.sub_classification,
-            sortmode: "ListedDate"
+            sortmode: "ListedDate",
+            worktype: filters.work_type
         };
 
         const listing_ids: string[] = [];
