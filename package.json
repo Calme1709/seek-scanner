@@ -1,0 +1,25 @@
+{
+  "name": "seek-scanner",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "postinstall": "npm run models:pull",
+    "start": "npm run build && node ./dist/index.js",
+    "build": "rm -rf ./dist && tsc",
+    "models:pull": "node-llama-cpp pull --dir ./models hf:MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF/Mistral-7B-Instruct-v0.3.Q5_K_M.gguf"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "node-llama-cpp": "^3.3.2",
+    "optimist": "^0.6.1"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^0.22.35",
+    "@types/optimist": "^0.0.33",
+    "typescript": "^5.7.2"
+  }
+}
