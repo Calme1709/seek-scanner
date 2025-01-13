@@ -9,6 +9,7 @@ interface SeekFilters {
     location: string;
     min_salary: string;
     work_type: string;
+    date_range?: string;
 }
 
 export class SeekService {
@@ -71,13 +72,17 @@ export class SeekService {
     async getListingIds(filters: SeekFilters): Promise<string[]> {
         const url = `https://www.seek.com.au/jobs-in-${filters.classification}/in-${filters.location}`;
 
-        const filter_query_params = {
+        const filter_query_params: Record<string, string> = {
             salaryrange: `${filters.min_salary}-`,
             salarytype: 'annual',
             subclassification: filters.sub_classification,
             sortmode: "ListedDate",
             worktype: filters.work_type
         };
+
+        if (filters.date_range !== undefined) {
+            filter_query_params.daterange = filters.date_range;
+        }
 
         const listing_ids: string[] = [];
 
